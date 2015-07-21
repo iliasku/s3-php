@@ -13,9 +13,9 @@ function gs_encodeSignature($s, $key) {
  
 function gs_prepareS3URL($file, $bucket) {
  
-  $awsKeyId = "accesskey"; 
-  $awsSecretKey = "secretkey"; 
- 
+  $KeyId = "accesskey"; 
+  $SecretKey = "secretkey"; 
+  $s3Endpoint = "endpoint";
  
   $file = rawurlencode($file); 
   $file = str_replace('%2F', '/', $file);
@@ -24,10 +24,10 @@ function gs_prepareS3URL($file, $bucket) {
   $expires = strtotime('+1 hour');
  
   $stringToSign = gs_getStringToSign('GET', $expires, "/$path"); 
-  $signature = gs_encodeSignature($stringToSign, $awsSecretKey); 
+  $signature = gs_encodeSignature($stringToSign, $SecretKey); 
 
-  $url = "http://$bucket.s3.amazonaws.com/$file";
-  $url .= '?AWSAccessKeyId='.$awsKeyId
+  $url = "http://$bucket.$s3Endpoint/$file";
+  $url .= '?AWSAccessKeyId='.$KeyId
          .'&Expires='.$expires
          .'&Signature='.$signature;
          
@@ -37,3 +37,4 @@ function gs_prepareS3URL($file, $bucket) {
 $file = "win.jpg";
 $bucket = "bucket";
 $link = gs_prepareS3URL($file, $bucket);
+echo $link;
