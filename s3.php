@@ -34,6 +34,6 @@ function gs_prepareS3URL($file, $bucket) {
   return $url;
 }
 
-  $file = "win.jpg";
-  $bucket = "bucket";
-  $link = gs_prepareS3URL($file, $bucket);
+$file = "win.jpg";
+$bucket = "bucket";
+$link = gs_prepareS3URL($file, $bucket);
